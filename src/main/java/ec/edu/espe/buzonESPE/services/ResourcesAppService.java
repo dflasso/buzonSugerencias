@@ -46,7 +46,9 @@ public class ResourcesAppService implements IResourcesAppService {
 			user = iUserservice.registerUser(user);
 		} else if (users.size() > 1) {
 			throw new RuntimeException("El email esta registrado en dos usuarios");
-		} 
+		} else if(users.size() ==  1) {
+			user = users.get(0);
+		}
 		
 		ResponseResourcerUser response = new ResponseResourcerUser(this.foundResources(user.getProfile()), user);
 

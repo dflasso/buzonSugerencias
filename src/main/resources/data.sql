@@ -59,3 +59,17 @@ INSERT INTO carrer (description, name, id_department, id_modality) VALUES
 ('Economía', 'Economía', 7, 2),
 ('Turismo', 'Turismo', 7, 2),
 ('Tecnologías de la Información', 'Tecnologías de la Información', 1, 2);
+
+
+/*Denuncia de prueba*/
+INSERT INTO user (id_UserESPE, name, lastname, email, rol, nationality, num_Document, gender, sex, relationship_University, civil_Status, place_Date_Birth, ethnicity, home_Address , cellphone,
+ conventional_Telephone, disability, current_Level, id_Carrer, id_Profile) VALUES 
+('L00368593', 'DANY FERNANDO', 'LASSO AYALA', 'dflasso1@espe.edu.ec', 'N', 'ecuatoriana', '1726039967', 'Hombre', 'M', 'Estudiante', 'Soltero', 'Quito, 9 de Sep. 1997', 'mestizo', 'INCA', '0999258192', '2404123', 'ninguna', '7mo', '1', '1'  );
+
+
+INSERT INTO complaint (description, type, effects, relationship_Aggresor, frequency_Agresion, date_Agresion, send_Date_Complaint, place_Agresion, department_Agresion, state_Complaint, exist_Evidence,id_User_Informer )VALUES
+('maltrato', 'Fisica', 'moretones', 'estudiante - estudiante', 'semanal', '2020-03-22 15:23:32', '2020-03-22 15:23:32', 'Aulas', 'DCC', 'No procesada', 1, 1 );
+
+
+
+

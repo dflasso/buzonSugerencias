@@ -29,7 +29,7 @@ public class MessagesTray {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idMessagesTray")
-	private Long idComplaint;
+	private Long idMessagesTray;
 	
 	@Column(name = "message", length = 500,nullable = false)
 	private String message;
@@ -37,7 +37,13 @@ public class MessagesTray {
 	@Column(name = "stateMessage", length = 100, nullable = false)
 	private String stateMessage; //No Leido - Leido
 	
-	@Column(name = "dataAgresion", nullable = false)
+	@Column(name = "userNameTransmitter", length = 200)
+	private String userNameTransmitter; 
+	
+	@Column(name = "userNameReceiver", length = 200)
+	private String userNameReceiver; 
+	
+	@Column(name = "sendMessage", nullable = false)
 	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss")
 	private LocalDateTime sendMessage;
 	
@@ -47,7 +53,7 @@ public class MessagesTray {
 	private User userTransmitter;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idUserReceiver", referencedColumnName = "idUser")
+	@JoinColumn(name = "idUserReceiver", nullable = false, referencedColumnName = "idUser")
 	@JsonIgnore
 	private User userReceiver;
 }
