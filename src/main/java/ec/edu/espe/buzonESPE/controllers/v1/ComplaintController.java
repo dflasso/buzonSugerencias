@@ -70,7 +70,7 @@ public class ComplaintController {
 			@ApiResponse(code = 404, message = "No existen Denuncias"),
 			@ApiResponse(code = 409, message = "Problemas al obtener las denuncias")})
 	public ResponseEntity<?> getDetailComplaint(@PathVariable(value="idComplaint") Long idComplaint) throws NotFoundException {
-		return new ResponseEntity<>(complaintService.getDetailComplaint(idComplaint).get(), HttpStatus.ALREADY_REPORTED);
+		return new ResponseEntity<>(complaintService.getDetailComplaint(idComplaint), HttpStatus.ALREADY_REPORTED);
 	}
 
 }

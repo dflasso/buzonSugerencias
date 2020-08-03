@@ -79,17 +79,17 @@ public class ComplaintService implements IComplaintService{
 		}
 		User userInformer = complaintOptional.get().getUserInformer();
 		Map<String, Object> detailComplaint = new HashMap<String, Object>();
-		detailComplaint.put("Complaint", complaintOptional.get());
-		detailComplaint.put("User", userInformer);
+		detailComplaint.put("complaint", complaintOptional.get());
+		detailComplaint.put("user", userInformer);
 		
 		if(userInformer.getCarrer() != null) {
 			Carrer carrer = userInformer.getCarrer();
 			Department department = carrer.getDepartment();
 			Modality modality = carrer.getModality();
 			
-			detailComplaint.put("Carrer", carrer);
-			detailComplaint.put("Department", department);
-			detailComplaint.put("Modality", modality);
+			detailComplaint.put("carrer", carrer.getName());
+			detailComplaint.put("department", department.getName() + " - " + department.getDescription());
+			detailComplaint.put("modality", modality.getName());
 		}
 		
 		return Optional.of(detailComplaint);
