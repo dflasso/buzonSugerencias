@@ -105,7 +105,7 @@ public class ComplaintPdfView {
 	}
 
 	private PdfPTable buildInfoStudent(Map<String, Object> model) {
-		User user = (User) model.get("User");
+		User user = (User) model.get("user");
 		if(user == null) {
 			throw new RuntimeException("No se enviaron datos del usuario denunciante.");
 		}
