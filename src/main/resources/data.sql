@@ -68,7 +68,7 @@ INSERT INTO user (id_UserESPE, name, lastname, email, rol, nationality, num_Docu
 
 
 INSERT INTO complaint (description, type, effects, relationship_Aggresor, frequency_Agresion, date_Agresion, send_Date_Complaint, place_Agresion, department_Agresion, state_Complaint, exist_Evidence,id_User_Informer )VALUES
-('maltrato', 'Fisica', 'moretones', 'estudiante - estudiante', 'semanal', '2020-03-22 15:23:32', '2020-03-22 15:23:32', 'Aulas', 'DCC', 'No procesada', 1, 1 );
+('maltrato', 'Fisica', 'moretones', 'estudiante - estudiante', 'semanal', '2020-03-22 15:23:32', '2020-03-22 15:23:32', 'Aulas', 'DCC', 'No procesada', 1, 2 );
 
 
 
