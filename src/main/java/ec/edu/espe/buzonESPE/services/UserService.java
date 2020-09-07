@@ -39,7 +39,7 @@ public class UserService implements IUserService {
 		}
 		user.setRol("N");
 		user.setProfile(profileRepository.findByName("Normal").get());
-		
+		System.err.println(user.getProfile().getDescription());
 		try {
 			user = userRepository.save(user);
 		} catch (Exception e) {
@@ -85,7 +85,9 @@ public class UserService implements IUserService {
 	@Override
 	public Optional<?> saveDetailUser(UserRequestDTO userDTO) {
 		User user = this.searchByEmail(userDTO.getUser().getEmail()).get();
-		user.setCarrer(userDTO.getCarrer());
+		if(!userDTO.getCarrer().getIdCarrer().equals(Long.parseLong("-1"))) {
+			user.setCarrer(userDTO.getCarrer());
+		}
 		user.setCellphone(userDTO.getUser().getCellphone());
 		user.setCivilStatus(userDTO.getUser().getCivilStatus());
 		user.setConventionalTelephone(userDTO.getUser().getConventionalTelephone());
