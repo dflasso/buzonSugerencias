@@ -101,7 +101,7 @@ public class UserService implements IUserService {
 		user.setNumDocument(userDTO.getUser().getNumDocument());
 		user.setPlaceDateBirth(userDTO.getUser().getPlaceDateBirth());
 		user.setSex(userDTO.getUser().getSex());
-		
+		user.setRelationshipUniversity(userDTO.getUser().getRelationshipUniversity());
 		try {
 			userRepository.save(user);
 		} catch (Exception e) {
