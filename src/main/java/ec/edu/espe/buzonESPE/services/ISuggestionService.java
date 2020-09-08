@@ -1,6 +1,6 @@
 package ec.edu.espe.buzonESPE.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import ec.edu.espe.buzonESPE.dto.request.SuggestionDTO;
@@ -18,7 +18,7 @@ public interface ISuggestionService {
 	
 	public Optional<?> consultSuggestion(SuggestionDTO suggestionDTO) throws NotFoundException;
 	
-	public Optional<?> reportSuggestions(LocalDateTime startDate,LocalDateTime endingDate )throws NotFoundException;
+	public Optional<?> reportSuggestions(LocalDate startDate,LocalDate endingDate )throws NotFoundException;
 	
 	public Optional<?> getAllSuggestions() throws NotFoundException;
 

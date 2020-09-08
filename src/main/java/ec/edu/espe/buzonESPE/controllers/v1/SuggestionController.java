@@ -1,6 +1,6 @@
 package ec.edu.espe.buzonESPE.controllers.v1;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.validation.Valid;
 
@@ -75,13 +75,13 @@ public class SuggestionController {
 	}
 
 	@GetMapping("/get-report/{startDate}/{endingDate}")
-	@ApiOperation(value = "Poner un Like a una sugerencia", notes = "<b>Sugerencia:</b> <ul><li><b>Fecha Inicio:</b> 2020-07-22 00:00:00 (El usuario ingresa la fecha y se adjunta las cero horas)</li>"
+	@ApiOperation(value = "Obtener sugerencias por fechas", notes = "<b>Sugerencia:</b> <ul><li><b>Fecha Inicio:</b> 2020-07-22 00:00:00 (El usuario ingresa la fecha y se adjunta las cero horas)</li>"
 			+ "<li><b>Fecha de Fin:</b>2020-07-25 23:59:59 (El usuario ingresa la fecha y se adjunta las última hora del día) </li></ul>")
 	@ApiResponses(value = { @ApiResponse(code = 208, message = "Sugerencia Encontrada"),
 			@ApiResponse(code = 404, message = "No existen sugerencias en el rango de fecha")})
 	public ResponseEntity<?> reportSuggestions(
-	@PathVariable(value="startDate") @DateTimeFormat(pattern="yyyy-MM-dd kk:mm:ss") LocalDateTime startDate,
-	@PathVariable(value = "endingDate") @DateTimeFormat(pattern="yyyy-MM-dd kk:mm:ss") LocalDateTime endingDate) throws NotFoundException {
+	@PathVariable(value="startDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate,
+	@PathVariable(value = "endingDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate endingDate) throws NotFoundException {
 		return new ResponseEntity<>(iSuggestionService.reportSuggestions(startDate, endingDate),
 				HttpStatus.ALREADY_REPORTED);
 	}

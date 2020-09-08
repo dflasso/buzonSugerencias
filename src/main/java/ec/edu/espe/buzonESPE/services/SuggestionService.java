@@ -1,5 +1,6 @@
 package ec.edu.espe.buzonESPE.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -107,8 +108,10 @@ public class SuggestionService implements ISuggestionService{
 	}
 
 	@Override
-	public Optional<?> reportSuggestions(LocalDateTime startDate, LocalDateTime endingDate) throws NotFoundException{
-		List<Suggestion> suggestions = suggestionRepository.findAllByCreationDateBetween(startDate, endingDate);
+	public Optional<?> reportSuggestions(LocalDate startDate, LocalDate endingDate) throws NotFoundException{
+		
+		
+		List<Suggestion> suggestions = suggestionRepository.findAllByCreationDateBetween(startDate.atStartOfDay(), endingDate.atStartOfDay());
 		if(suggestions.isEmpty()) {
 			throw new NotFoundException(Suggestion.class, "Fecha de inicio", startDate.toString(), "Fecha Final", endingDate.toString());
 		}
