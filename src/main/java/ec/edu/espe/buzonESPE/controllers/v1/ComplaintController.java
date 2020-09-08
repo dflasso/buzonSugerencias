@@ -89,7 +89,7 @@ public class ComplaintController {
 	public ResponseEntity<?> getComplaintsByDateAndState(
 			@PathVariable(value="startDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate, 
 			@PathVariable(value="endingDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate endingDate,
-			String stateComplaint) throws NotFoundException {
+			@PathVariable(value="stateComplaint") String stateComplaint) throws NotFoundException {
 		return new ResponseEntity<>(complaintService.getComplaintsByDateAndState(startDate, endingDate, stateComplaint),
 				HttpStatus.ALREADY_REPORTED);
 	}
