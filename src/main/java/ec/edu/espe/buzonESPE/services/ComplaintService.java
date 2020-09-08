@@ -1,5 +1,6 @@
 package ec.edu.espe.buzonESPE.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +94,16 @@ public class ComplaintService implements IComplaintService{
 		}
 		
 		return Optional.of(detailComplaint);
+	}
+
+	@Override
+	public Optional<?> getComplaintsByDateAndState(LocalDate startDate, LocalDate endingDate, String stateComplaint)
+			throws NotFoundException {
+		List<Complaint> complaints = complaintRepository.findByStateComplaintAndSendDateComplaintBetween(stateComplaint, startDate.atStartOfDay(), endingDate.atStartOfDay());
+		if(complaints.isEmpty()) {
+			throw new NotFoundException(Complaint.class, "startDate", startDate, "endingDate", endingDate, "stateComplaint", stateComplaint);
+		}
+		return Optional.of(complaints);
 	}
 	
 	

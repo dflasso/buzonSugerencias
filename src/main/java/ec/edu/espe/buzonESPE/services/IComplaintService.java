@@ -1,5 +1,6 @@
 package ec.edu.espe.buzonESPE.services;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import ec.edu.espe.buzonESPE.exceptions.NotFoundException;
@@ -14,4 +15,6 @@ public interface IComplaintService {
 	public Optional<?> getComplaintsByUserInformerAndState(String emailUserInformer, String stateComplaint) throws NotFoundException;
 	
 	public Optional<?> getDetailComplaint(Long idComplaint) throws NotFoundException;
+	
+	public Optional<?> getComplaintsByDateAndState(LocalDate startDate, LocalDate endingDate, String stateComplaint) throws NotFoundException;
 }

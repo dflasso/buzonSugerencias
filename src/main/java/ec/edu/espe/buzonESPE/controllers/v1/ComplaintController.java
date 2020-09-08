@@ -1,8 +1,11 @@
 package ec.edu.espe.buzonESPE.controllers.v1;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -32,45 +35,63 @@ import io.swagger.annotations.ApiResponses;
 public class ComplaintController {
 	@Autowired
 	private IComplaintService complaintService;
-	
+
 	@PostMapping("/save/{emailUserInformer}")
 	@ApiOperation(value = "Registrar denuncia", notes = "<b>Todos los campos son obligatorios, a excepción de:</b>"
-			+ "<ul><li>sendDateComplaint (Se crea internamente)</li>"
-			+ "<li>idComplaint (Se crea internamente)</li>"
+			+ "<ul><li>sendDateComplaint (Se crea internamente)</li>" + "<li>idComplaint (Se crea internamente)</li>"
 			+ "<li>stateComplaint (por defecto se coloca  'No procesada')</li></ul>")
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "Denuncia Registrada"),
 			@ApiResponse(code = 404, message = "No existe el usuario"),
-			@ApiResponse(code = 409, message = "Problemas al registrar la denuncia")})
-	public ResponseEntity<?> saveComplaint(@Valid @RequestBody Complaint complaint, 
-			@PathVariable(value="emailUserInformer") String emailUserInformer){
-		return new ResponseEntity<>(complaintService.saveComplaint(complaint, emailUserInformer),HttpStatus.CREATED);
+			@ApiResponse(code = 409, message = "Problemas al registrar la denuncia") })
+	public ResponseEntity<?> saveComplaint(@Valid @RequestBody Complaint complaint,
+			@PathVariable(value = "emailUserInformer") String emailUserInformer) {
+		return new ResponseEntity<>(complaintService.saveComplaint(complaint, emailUserInformer), HttpStatus.CREATED);
 	}
-	
+
 	@PatchMapping("/change-state/{idComplaint}/{stateComplaint}")
 	@ApiOperation(value = "Cambiar de Estado Denuncias, posibles estados (No Procesada - En Proceso - Archivada)")
 	@ApiResponses(value = { @ApiResponse(code = 202, message = "La Denuncia cambio de estado con exito"),
 			@ApiResponse(code = 404, message = "No existe la Denuncia"),
-			@ApiResponse(code = 409, message = "Problemas al registrar los cambios en la denuncia")})
-	public ResponseEntity<?> changeStateComplaint(@PathVariable(value="idComplaint") Long idComplaint,@PathVariable(value="stateComplaint")  String stateComplaint) throws NotFoundException {
-		return new ResponseEntity<>(complaintService.changeStateComplaint(idComplaint, stateComplaint), HttpStatus.ACCEPTED);
+			@ApiResponse(code = 409, message = "Problemas al registrar los cambios en la denuncia") })
+	public ResponseEntity<?> changeStateComplaint(@PathVariable(value = "idComplaint") Long idComplaint,
+			@PathVariable(value = "stateComplaint") String stateComplaint) throws NotFoundException {
+		return new ResponseEntity<>(complaintService.changeStateComplaint(idComplaint, stateComplaint),
+				HttpStatus.ACCEPTED);
 	}
-	
+
 	@GetMapping("/find/{emailUserInformer}/{stateComplaint}")
 	@ApiOperation(value = "Obtiene listado de Denuncia según un usuario y un usuario")
 	@ApiResponses(value = { @ApiResponse(code = 208, message = "Reporte de las denuncias procesado exitosamente"),
 			@ApiResponse(code = 404, message = "No existen Denuncias"),
-			@ApiResponse(code = 409, message = "Problemas al obtener las denuncias")})
-	public ResponseEntity<?> getComplaintsByUserInformerAndState(@PathVariable(value="emailUserInformer")  String emailUserInformer,  @PathVariable(value="stateComplaint")  String stateComplaint) throws NotFoundException{
-		return new ResponseEntity<>(complaintService.getComplaintsByUserInformerAndState(emailUserInformer, stateComplaint), HttpStatus.ALREADY_REPORTED);
+			@ApiResponse(code = 409, message = "Problemas al obtener las denuncias") })
+	public ResponseEntity<?> getComplaintsByUserInformerAndState(
+			@PathVariable(value = "emailUserInformer") String emailUserInformer,
+			@PathVariable(value = "stateComplaint") String stateComplaint) throws NotFoundException {
+		return new ResponseEntity<>(
+				complaintService.getComplaintsByUserInformerAndState(emailUserInformer, stateComplaint),
+				HttpStatus.ALREADY_REPORTED);
 	}
-	
+
 	@GetMapping("/get-detail/{idComplaint}")
 	@ApiOperation(value = "Obtiene listado de Denuncia según un usuario y un usuario")
 	@ApiResponses(value = { @ApiResponse(code = 208, message = "Reporte de las denuncias procesado exitosamente"),
 			@ApiResponse(code = 404, message = "No existen Denuncias"),
-			@ApiResponse(code = 409, message = "Problemas al obtener las denuncias")})
-	public ResponseEntity<?> getDetailComplaint(@PathVariable(value="idComplaint") Long idComplaint) throws NotFoundException {
+			@ApiResponse(code = 409, message = "Problemas al obtener las denuncias") })
+	public ResponseEntity<?> getDetailComplaint(@PathVariable(value = "idComplaint") Long idComplaint)
+			throws NotFoundException {
 		return new ResponseEntity<>(complaintService.getDetailComplaint(idComplaint), HttpStatus.ALREADY_REPORTED);
+	}
+
+	@GetMapping("/get-report/{stateComplaint}/by-state/{startDate}/{endingDate}/andDates")
+	@ApiOperation(value = "Obtiene listado de Denuncias según un rango de fechas y un estado")
+	@ApiResponses(value = { @ApiResponse(code = 208, message = "Reporte de las denuncias procesado exitosamente"),
+			@ApiResponse(code = 404, message = "No existen Denuncias") })
+	public ResponseEntity<?> getComplaintsByDateAndState(
+			@PathVariable(value="startDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate startDate, 
+			@PathVariable(value="endingDate") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate endingDate,
+			String stateComplaint) throws NotFoundException {
+		return new ResponseEntity<>(complaintService.getComplaintsByDateAndState(startDate, endingDate, stateComplaint),
+				HttpStatus.ALREADY_REPORTED);
 	}
 
 }
