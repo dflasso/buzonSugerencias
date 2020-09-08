@@ -1,5 +1,6 @@
 package ec.edu.espe.buzonESPE.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -47,8 +48,8 @@ public class Complaint {
 	private String frequencyAgresion;
 	
 	@Column(name = "dateAgresion", nullable = false)
-	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss")
-	private LocalDateTime dateAgresion;
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate dateAgresion;
 	
 	@Column(name = "sendDateComplaint", nullable = false)
 	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd kk:mm:ss")
